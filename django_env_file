@@ -1,0 +1,9 @@
+DJANGO_SETTINGS_MODULE=celery_test.settings
+DOCKER=1
+DB_HOST=db
+DB_USER=test
+DB_PASSWORD=password
+DB_NAME=test
+PORT=8000
+MEDIA_ROOT=/media
+MEDIA_URL=/
