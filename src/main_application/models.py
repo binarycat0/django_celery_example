@@ -1,4 +1,5 @@
 import logging
+from pathlib import Path
 
 from django.db import models
 from django.db.models import fields
@@ -26,13 +27,13 @@ class SomeFile(models.Model):
         choices=STATUS
     )
 
-    file_name = fields.CharField(max_length=249, default='', blank=True, editable=False)
+    @property
+    def file_exist(self):
+        return Path(self.file.path).exists() if self.file else False
 
-    def save(self, *args, **kwargs):
-        self.file_name = self.file.path if self.file else '_blank_'
-        print(self.create_time)
-
-        super().save(*args, **kwargs)
+    @property
+    def file_name(self):
+        return self.file.path if self.file else ''
 
 
 class FileContent(models.Model):

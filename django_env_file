@@ -11,6 +11,9 @@ DB_NAME=test
 # django server
 PORT=8000
 
+# static
+STATIC_ROOT=/static
+
 # media
 MEDIA_ROOT=/media
 MEDIA_URL=/media/

@@ -140,7 +140,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
-STATIC_URL = '/static/'
 
 LOGGING = {
     'version': 1,
@@ -187,6 +186,9 @@ CELERY_RESULT_BACKEND = 'django-db'
 CELERY_IMPORTS = ['main_application.tasks', ]
 
 # files
+STATIC_URL = '/static/'
+STATIC_ROOT = os.environ.get('STATIC_ROOT')
+
 MEDIA_ROOT = os.environ.get('MEDIA_ROOT', '/media')
 MEDIA_URL = os.environ.get('MEDIA_URL', '/media/')
 
