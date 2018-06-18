@@ -2,4 +2,4 @@
 
 rm celerybeat.pid
 
-celery -A my_app beat -S django -l info --scheduler django_celery_beat.schedulers:DatabaseScheduler
+celery -A main_application beat -S django -l info --scheduler django_celery_beat.schedulers:DatabaseScheduler --logfile=/log/celery_beat.log

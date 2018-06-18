@@ -1,23 +1,19 @@
 import logging
 
-from main_application import models
+from main_application import logic
 from main_application.celery import app
 
 logger = logging.getLogger(__name__)
 
 
 @app.task(bind=True)
-def change_status_my_model(*args, **kwargs):
-    logger.debug('kwargs %s', str(kwargs))
+def load_content_from_file(self, some_file_id, delay=None):
+    try:
+        logger.info('START _ load_content_from_file')
+        logic.load_content_from_file(some_file_id, delay)
+    except Exception as ex:
+        logger.info('EXCEPTION _ load_content_from_file')
+        logger.exception(ex)
+        raise ex
 
-    model_id = kwargs.get('model_id', None)
-    logger.debug('model_id %s', model_id)
-
-    logger.debug(str(models.MyModel.objects.all()))
-
-    obj = models.MyModel.objects.filter(pk=int(model_id)).first()
-    if obj:
-        obj.progress()
-        return obj.status
-
-    return 'fail'
+    return True

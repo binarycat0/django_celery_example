@@ -72,7 +72,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'celery_test.wsgi.application'
+WSGI_APPLICATION = 'django_celery_example.wsgi.application'
 
 
 # Database
@@ -168,7 +168,7 @@ LOGGING = {
             'level': 'INFO',
             'propagate': False,
         },
-        'my_app': {
+        'main_application': {
             'level': 'DEBUG',
             'handlers': ['console'],
             'propagate': True,
@@ -179,6 +179,8 @@ LOGGING = {
 TIME_FORMAT = 'H:i:s:u'
 DATE_FORMAT = 'Y-m-d'
 DATETIME_FORMAT = 'c'
+
+USER_CELERY = strtobool(os.environ.get("USER_CELERY", "false"))
 
 CELERY_BROKER_URL = 'redis://redis:6379/0'
 CELERY_RESULT_BACKEND = 'django-db'

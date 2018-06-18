@@ -3,19 +3,22 @@ version: "3"
 services:
 
   nginx:
-    image: nginx
-    hostname: "nginx"
+    image: nginx:latest
     volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf:ro
-      - ./upload:/media/upload:ro
-      - nginx_log:/var/log/nginx
-    command: [nginx, '-g', 'daemon off;']
+     - ./nginx.conf:/etc/nginx/conf.d/nginx.conf
+     - /log
+     - static:/static
+     - media:/media
+    ports:
+     - "80:80"
+    environment:
+     - NGINX_PORT=80
     links:
       - django
     depends_on:
       - django
-    ports:
-      - 80:80
+    command: /bin/bash -c "envsubst < /etc/nginx/conf.d/nginx.conf > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
+
 
   django:
     hostname: "django"
@@ -28,7 +31,9 @@ services:
     volumes:
       - ./src:/app
       - ./entrypoints:/entrypoints
-      - ./upload:/media/upload
+      - /log
+      - static:/static
+      - media:/media
     links:
       - db
       - redis
@@ -45,9 +50,11 @@ services:
     volumes:
       - ./src:/app
       - ./entrypoints:/entrypoints
+      - /log
     links:
       - db
       - redis
+      - django
     depends_on:
       - django
 
@@ -60,9 +67,11 @@ services:
     volumes:
       - ./src:/app
       - ./entrypoints:/entrypoints
+      - /log
     links:
       - db
       - redis
+      - django
     depends_on:
       - django
 
@@ -75,8 +84,10 @@ services:
     volumes:
       - ./src:/app
       - ./entrypoints:/entrypoints
+      - /log
     links:
       - redis
+      - django
       - celery_worker
       - celery_beat
     depends_on:
@@ -106,3 +117,5 @@ volumes:
   db_data:
   redis_data:
   nginx_log:
+  static:
+  media:

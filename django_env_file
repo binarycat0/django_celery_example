@@ -1,5 +1,6 @@
-DJANGO_SETTINGS_MODULE=celery_test.settings
-DOCKER=1
+DJANGO_SETTINGS_MODULE=django_celery_example.settings
+DOCKER=true
+USER_CELERY=true
 
 # django database
 DB_HOST=db
@@ -12,7 +13,7 @@ PORT=8000
 
 # media
 MEDIA_ROOT=/media
-MEDIA_URL=/
+MEDIA_URL=/media/
 
 # postgres
 POSTGRES_DB=test

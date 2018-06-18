@@ -42,3 +42,7 @@ class FileContent(models.Model):
     file = models.ForeignKey(SomeFile, on_delete=models.CASCADE, blank=True, null=True)
 
     content = fields.TextField(blank=True, default="")
+
+    def append_string(self, string: str):
+        self.content += ('\n' + string.strip())
+        self.save()

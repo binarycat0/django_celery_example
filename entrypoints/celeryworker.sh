@@ -2,4 +2,4 @@
 
 rm celeryworker.pid
 
-celery -A my_app worker -l info
+celery -A main_application worker -l info --logfile=/log/celery_worker.log

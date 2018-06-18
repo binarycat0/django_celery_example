@@ -2,4 +2,4 @@
 
 rm celeryworker.pid
 
-celery flower -A my_app --port=5555
+celery flower -A main_application --port=5555 --logging=info -log-file-prefix=/log/flower.log
