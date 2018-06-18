@@ -2,7 +2,7 @@ from celery.app import Celery
 
 from django.conf import settings
 
-app = Celery('celery_test', broker=settings.CELERY_BROKER_URL)
+app = Celery('django_celery_example', broker=settings.CELERY_BROKER_URL)
 
 app.config_from_object('django.conf:settings', namespace='CELERY')
 app.autodiscover_tasks()

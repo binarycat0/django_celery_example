@@ -19,7 +19,8 @@ services:
 
   django:
     hostname: "django"
-    image: "test:test"
+    build: .
+    image: "django_celery_example"
     restart: "always"
     entrypoint: /entrypoints/webserver.sh
     env_file:
@@ -36,7 +37,7 @@ services:
       - redis
 
   celery_worker:
-    image: "test:test"
+    image: "django_celery_example"
     restart: "always"
     entrypoint: /entrypoints/celeryworker.sh
     env_file:
@@ -51,7 +52,7 @@ services:
       - django
 
   celery_beat:
-    image: "test:test"
+    image: "django_celery_example"
     restart: "always"
     entrypoint: /entrypoints/celerybeat.sh
     env_file:
@@ -66,7 +67,7 @@ services:
       - django
 
   celery_flower:
-    image: "test:test"
+    image: "django_celery_example"
     restart: "always"
     entrypoint: /entrypoints/celeryflower.sh
     env_file:
@@ -88,11 +89,8 @@ services:
   db:
     hostname: "db"
     image: "postgres:9.6"
-    environment:
-      - POSTGRES_DB=test
-      - POSTGRES_USER=test
-      - POSTGRES_PASSWORD=password
-      - PGDATA=/var/lib/postgresql/data
+    env_file:
+      - django_env_file
     volumes:
       - db_data:/var/lib/postgresql/data
 

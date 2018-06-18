@@ -1,7 +1,7 @@
 import logging
 
-from my_app import models
-from my_app.celery import app
+from main_application import models
+from main_application.celery import app
 
 logger = logging.getLogger(__name__)
 

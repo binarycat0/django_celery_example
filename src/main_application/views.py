@@ -3,7 +3,7 @@ import logging
 from django.http import JsonResponse
 from django.views import generic
 
-from my_app import tasks
+from main_application import tasks
 
 logger = logging.getLogger(__name__)
 

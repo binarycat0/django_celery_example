@@ -11,8 +11,9 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
+from distutils.util import strtobool
 
-is_docker = os.environ.get("DOCKER", None)
+is_docker = strtobool(os.environ.get("DOCKER", "false"))
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -21,7 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '%cw_offbi$7tx#+r6#^rk#o%=pv4a0$^!-_#fz@(9#jo@+@8y@'
+SECRET_KEY = '%cw_of123ewfads321twthgaffbi$7tx#+r6#^rk#o%=pv4a0$^!-_#fz@(9#jo@+@8y@'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -36,10 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'my_app.apps.MyAppConfig',
-    'files_app.apps.FilesAppConfig',
     'django_celery_results',
     'django_celery_beat',
+    'main_application.apps.MainApplicationConfig',
 ]
 
 MIDDLEWARE = [
@@ -52,7 +52,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'celery_test.urls'
+ROOT_URLCONF = 'django_celery_example.urls'
 
 TEMPLATES = [
     {
@@ -182,7 +182,7 @@ DATETIME_FORMAT = 'c'
 
 CELERY_BROKER_URL = 'redis://redis:6379/0'
 CELERY_RESULT_BACKEND = 'django-db'
-CELERY_IMPORTS = ['my_app.tasks', 'files_app.tasks']
+CELERY_IMPORTS = ['main_application.tasks', ]
 
 # files
 MEDIA_ROOT = os.environ.get('MEDIA_ROOT', '/media')
