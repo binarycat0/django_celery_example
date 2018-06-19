@@ -22,6 +22,6 @@ from main_application import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', views.Test.as_view()),
+    path('api/upload_file', views.UploadFile.as_view(), name='upload_file'),
     url(r'^$', TemplateView.as_view(template_name='index.html'), name='home'),
 ]

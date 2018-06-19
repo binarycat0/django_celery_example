@@ -186,6 +186,10 @@ CELERY_RESULT_BACKEND = 'django-db'
 CELERY_IMPORTS = ['main_application.tasks', ]
 
 # files
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]
+
 STATIC_URL = '/static/'
 STATIC_ROOT = os.environ.get('STATIC_ROOT')
 

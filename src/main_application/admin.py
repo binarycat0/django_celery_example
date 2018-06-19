@@ -28,7 +28,7 @@ class SomeFileAdmin(admin.ModelAdmin):
 
     list_display = ('id', 'display_file_name', 'display_file_exist', 'create_time', 'status', 'change_time')
 
-    readonly_fields = ('create_time', 'file_name', 'display_file_exist')
+    readonly_fields = ('create_time', 'file_name', 'display_file_exist', 'display_file_name')
 
     inlines = [
         FileContentInline
