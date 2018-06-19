@@ -18,10 +18,10 @@ from django.contrib import admin
 from django.urls import path
 from django.views.generic import TemplateView
 
-from main_application import views as my_app_views
+from main_application import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', my_app_views.Test.as_view()),
+    path('api/', views.Test.as_view()),
     url(r'^$', TemplateView.as_view(template_name='index.html'), name='home'),
 ]
